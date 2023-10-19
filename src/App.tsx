@@ -10,8 +10,8 @@ import { AppContextProvider } from './context/store';
 
 const App = (): JSX.Element => {
   return (
-    <AppContextProvider>
-      <QueryClientProvider client={QueryClientStore}>
+    <QueryClientProvider client={QueryClientStore}>
+      <AppContextProvider>
         <CacheProvider value={KudosRtlPlugin}>
           <ThemeProvider theme={KudosTheme}>
             <CssBaseline />
@@ -21,8 +21,8 @@ const App = (): JSX.Element => {
             <Toaster />
           </ThemeProvider>
         </CacheProvider>
-      </QueryClientProvider>
-    </AppContextProvider>
+      </AppContextProvider>
+    </QueryClientProvider>
   );
 };
 

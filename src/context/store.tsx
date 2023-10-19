@@ -7,7 +7,10 @@ import {
   IContextAction
 } from './types/context.type';
 import { UserReducer } from './user/user.reducer';
-import { ReJoinUser } from './user/user.action';
+import { LogoutUser, ReJoinUser } from './user/user.action';
+import { AXIOS } from '../config/axios';
+import { UseRefreshToken } from '../services/mutations/useRefreshToken';
+import { APIURL } from '../constants/api';
 
 const initialState: IAppContextState = {
   user: {
@@ -48,6 +51,38 @@ export const AppContextProvider: React.FC<IAppContextProviderProps> = ({
 }): JSX.Element => {
   const [state, dispatch] = useReducer(combineReducer, initialState);
   const dispatchWithMiddleware = thunkMiddleware(dispatch);
+  const refreshTokenMutation = UseRefreshToken();
+
+  // register interceptors => state => context !!!!!
+
+  AXIOS.interceptors.response.use(
+    (resp) => resp,
+    (error) => {
+      if (error?.response?.status === 401) {
+        const refresh = localStorage.getItem('refreshToken');
+        // access token man dg valid nist => ya nadadm accesstoken , ya expire
+        // call refresh token => seda beznm
+        if (refresh) {
+          refreshTokenMutation.mutate(
+            {
+              refresh
+            },
+            {
+              onSuccess: (res) => {
+                localStorage.setItem('accessToken', res.access);
+                dispatchWithMiddleware(ReJoinUser());
+              },
+              onError: () => {
+                dispatchWithMiddleware(LogoutUser());
+              }
+            }
+          );
+        } else {
+          dispatchWithMiddleware(LogoutUser());
+        }
+      }
+    }
+  );
 
   useEffect(() => {
     dispatchWithMiddleware(ReJoinUser());

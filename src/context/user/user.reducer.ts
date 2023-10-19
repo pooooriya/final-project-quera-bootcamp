@@ -18,6 +18,18 @@ export const UserReducer = (
         username: action?.payload?.username || '',
         phone_number: action?.payload?.phone_number || ''
       };
+    case UserActionTypes.USER_LOGGED_OUT:
+      return {
+        access: '',
+        email: '',
+        first_name: '',
+        last_name: '',
+        refresh: '',
+        thumbnail: '',
+        user_id: 0,
+        username: '',
+        phone_number: ''
+      };
     default:
       return state;
   }

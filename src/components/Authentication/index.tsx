@@ -5,8 +5,6 @@ import { UseLoginMutation } from '../../services/mutations/useLoginMutation';
 import toast from 'react-hot-toast';
 import { useContext } from 'react';
 import { AppContext } from '../../context/store';
-import { UserActionTypes } from '../../context/user/user.actiontype';
-import { AXIOS } from '../../config/axios';
 import { useNavigate } from 'react-router-dom';
 import { AuthenticateUser } from '../../context/user/user.action';
 
@@ -17,7 +15,7 @@ const validationSchema = yup.object({
 
 interface IAuthenticationProps {}
 const Authentication: React.FC<IAuthenticationProps> = (): JSX.Element => {
-  const { dispatch, state } = useContext(AppContext);
+  const { dispatch } = useContext(AppContext);
 
   const loginMutation = UseLoginMutation();
   const navigate = useNavigate();

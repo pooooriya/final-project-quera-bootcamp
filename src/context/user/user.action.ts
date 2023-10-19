@@ -53,3 +53,16 @@ export const ReJoinUser = () => (dispatch: any) => {
     AXIOS.defaults.headers.common.Authorization = '';
   }
 };
+
+export const LogoutUser = () => (dispatch: any) => {
+  //1.destroy all localstorages
+  localStorage.removeItem('accessToken');
+  localStorage.removeItem('refreshToken');
+  localStorage.removeItem('user');
+  //2. remove authorization header from axios
+  AXIOS.defaults.headers.common.Authorization = '';
+  //3. earse all global state managments from user reducer
+  dispatch({
+    type: UserActionTypes.USER_LOGGED_OUT
+  });
+};

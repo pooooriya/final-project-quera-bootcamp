@@ -1,8 +1,6 @@
-type apiUrlType = {
-  [t in string]: string;
-};
-
-export const APIURL: apiUrlType = {
+export const APIURL = {
   Login: '/accounts/login/',
-  Register: '/accounts'
+  Register: '/accounts',
+  RefreshToken: '/accounts/refresh/',
+  KudosList: '/Kudoses'
 };

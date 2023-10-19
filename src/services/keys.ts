@@ -1,3 +1,5 @@
 export const ReactQueryKeys = {
-  Login: 'login'
+  Login: 'login',
+  Refresh: 'refresh',
+  KudosList: 'KudosList'
 };
