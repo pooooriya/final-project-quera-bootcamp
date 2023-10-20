@@ -38,3 +38,19 @@ export interface CreatedBy {
   name: string;
   avatar: string;
 }
+
+export interface IUserResponse {
+  id: string;
+  username: string;
+  name: string;
+  avatar: string;
+}
+
+export interface IAddKudosRequest {
+  id: string;
+  createdBy: CreatedBy;
+  title: string;
+  for: CreatedBy;
+  likeCount: number;
+  visitCount: number;
+}

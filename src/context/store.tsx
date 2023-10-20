@@ -10,7 +10,6 @@ import { UserReducer } from './user/user.reducer';
 import { LogoutUser, ReJoinUser } from './user/user.action';
 import { AXIOS } from '../config/axios';
 import { UseRefreshToken } from '../services/mutations/useRefreshToken';
-import { APIURL } from '../constants/api';
 
 const initialState: IAppContextState = {
   user: {

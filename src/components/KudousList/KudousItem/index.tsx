@@ -5,6 +5,7 @@ interface IKudosItemProps {
   description: string;
   likeCount: number;
   visitCount: number;
+  onClick: () => void;
   from: {
     name: string;
     avatar: string;
@@ -20,10 +21,13 @@ const KudosItem: React.FC<IKudosItemProps> = ({
   likeCount,
   visitCount,
   from: { name: sourceName, avatar: sourceAvatar },
-  to: { name: receptionName, avatar: receptionAvatar }
+  to: { name: receptionName, avatar: receptionAvatar },
+  onClick
 }): JSX.Element => {
   return (
     <Stack
+      onClick={onClick}
+      component="a"
       spacing={1}
       padding={2}
       sx={{
